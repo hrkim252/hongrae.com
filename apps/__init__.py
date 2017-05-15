@@ -6,7 +6,6 @@ logIn = False
 
 @app.route("/")
 def index():
-    print(logIn)
     return render_template("index.tpl", logIn=logIn)
 
 @app.route("/login")
@@ -14,9 +13,6 @@ def login():
     id = request.args.get("id")
     password = request.args.get("password")
 
-    print(id)
-    print(password)
-    
     if id == "hrkim" and password == "hongrae":
         global logIn
         logIn = True
