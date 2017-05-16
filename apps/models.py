@@ -4,13 +4,13 @@ from apps.database import Base
 class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    ID = Column(String, unique=True)
-    PW = Column(String, unique=True)
+    num = Column(Integer, primary_key=True)
+    id = Column(String, unique=True)
+    pw = Column(String, unique=True)
 
-    def __init__(self, ID=None, PW=None):
-        self.ID = ID
-        self.PW = PW
+    def __init__(self, id=None, pw=None):
+        self.id = id
+        self.pw = pw
 
     def __repr__(self):
-        return '{0}, {1}'.format(self.ID, self.PW)
+        return '{0}, {1}'.format(self.id, self.pw)

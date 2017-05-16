@@ -4,8 +4,6 @@ from apps.models import User
 
 app = Flask(__name__)
 
-login = False
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
@@ -16,27 +14,15 @@ def index():
 
 @app.route("/login")
 def login():
-    global login
     return render_template("login.tpl", login=login)
 
 @app.route("/try_login")
 def try_login():
     id = request.args.get("id")
-    password = request.args.get("password")
+    pw = request.args.get("password")
 
     for u in User.query.all():
-        if id == u.ID and password == u.PW:
-            global login
-            login = True
+        if id == u.id and password == u.pw:
             return jsonify(result=True)
 
     return jsonify(result=False)
-
-@app.route("/try_logout")
-def try_logout():
-    logout = request.args.get("logout")
-    
-    if logout == "true":
-        global login
-        login = False
-        return jsonify(result=None)
